@@ -23,13 +23,17 @@ segment .bss
 
 
 ;========================== SECTION .TEXT ======================================================|
-;MY CODE GOES HERE
-                                                                    |
+;MY CODE GOES HERE                                                                   |
 segment .text
-org 100h
 
+ORG 100h
 Main: ;non local label
-
+ mov ah, 09h
+ mov dx, helloWorld
+ int 21h
+ exit:
+ mov ah, 4ch
+ int 21h
 	
 
 ;************************* END SECTION TEXT ********************************************************
