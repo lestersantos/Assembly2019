@@ -14,12 +14,22 @@
     int 21h			;call the interruption
 %endmacro
 
+%macro readInputChar 0
+    mov ah, 01h    ;Return AL with the ASCII of the read char
+    int 21h        ;call the interruption
+%endmacro
 ;************************************** END MY MACROS *****************************
 global Main
 ;========================== SECTION .DATA ====================
 segment .data
 
+opcion	db  10,0ah,0dh,'$'
+
 helloWorld db 0ah,0dh,'Hola mundo','$'
+esUno	db 0ah,0dh,'es uno',10,'$'
+esDos	db 0ah,0dh,'es dos',10,'$'
+esTres	db 0ah,0dh,'es tres',10,'$'
+gameStart db 10,13,'Juego Iniciado',10,13,'$'
 
 headerString db 13,13,10
         db 'UNIVERSIDAD DE SAN CARLOS DE GUATEMALA',13,10
@@ -50,14 +60,36 @@ segment .bss
 
 
 ;========================== SECTION .TEXT ======================================================|
-;MY CODE GOES HERE. I left a blank line between segment .text error                                                                  |
+;MY CODE GOES HERE. If I left a blank line 
+;between this line and "segment .text" gives error                                                                  |
 segment .text
 
 ORG 100h
 Main: ;non local label
  print headerString
  print mainMenu
- exit:
+
+Menu:
+	readInputChar
+	cmp al, 49
+	je Opcion1
+	cmp al, 50
+	je Opcion2
+	cmp al, 51
+	je Opcion3
+
+Opcion1:
+	print esUno
+	print gameStart
+	jmp Main
+Opcion2:
+	print esDos
+	jmp Main
+Opcion3:
+	print esTres
+	jmp exit
+
+exit:
  mov ah, 4ch
  int 21h
 	
