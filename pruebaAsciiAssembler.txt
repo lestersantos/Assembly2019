@@ -18,3 +18,29 @@ db 2571,2572,2573,2574,2575,2576,2577,2578,2579,2580,'2581',2581
 db 2582,2583,2584,2585,2586,2587,2588,2589,2590,2591,2592,2593,2594
 db 2595,2596,2597,2598,2599,2560,'$'
 ascii4 db 13,10,'ASCII4: ',228,2570,2571,2572,2573,2574,2575,2576,2577,2578,2579,2580,2581,2582,2583,'$'
+
+-----TESTING ARRAYS--------------------
+	print var
+	print var2
+	mov al, [var]
+	mov [var2], al
+	mov al, [var+1]
+	mov [var2+1], al
+	print var
+	print var2
+----------------------
+----SUM OF TWO NUMBERS-------------
+	print var
+	print var2
+	mov si,00
+	mov al, [var]
+	sub al,'0'
+	mov ah, [var2]
+	sub ah,'0'
+	add ah, al
+	add ah,'0'
+	mov [var3],ah
+	print var
+	print var2
+	print var3
+------------------------------

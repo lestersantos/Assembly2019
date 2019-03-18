@@ -20,10 +20,112 @@
 %endmacro
 
 %macro readString 0
-	mov ah, 0ah
-	mov dx, inputBuffer
+	mov si, 0			;initialize counter in 0
+	%%while:
+	mov ah, 01h
 	int 21h
-%endmacro
+	cmp al, 0dh    		 ; al = CR(carriage return)
+	je %%skip 
+	cmp al, 45h 		 ; al = letter E
+	je %%letterE
+	cmp al, 53h 		 ; al = letter S
+	je %%letterS		 ;jump to state S either for SAVE or SHOW
+	jmp %%endReading	 ;end macro readString
+	%%letterE:
+	mov [option + si],al ;save letter E in option[0]
+	inc si				 ;increase counter to 1
+	mov ah, 01h
+	int 21h
+	cmp al, 58H ;al = letter X
+	je %%letterX
+	jmp %%endReading
+	%%letterX:
+	mov [option + si],al ;save letter X in option[1]
+	inc si				 ;increase counter to 2
+	mov ah, 01h
+	int 21h
+	cmp al, 49h ;al = letter I
+	je %%letterI
+	jmp %%endReading
+	%%letterI:
+	mov [option + si],al ;save letter I in option[2]
+	inc si				 ;increase counter to 3
+	mov ah, 01h
+	int 21h
+	cmp al, 54h ;al = letter T
+	je %%letterT
+	jmp %%endReading
+	%%letterT: 			 ;last state for option EXIT
+	mov [option + si],al ;save letter T in option[3]
+	print newline
+	print optionMsg
+	print option
+	mov ah,'0'	 ;the option to run is optionRun = (EXIT,0)
+	mov [optionRun],ah		
+	jmp %%endReading	 ;end macro readingString
+	%%letterS:
+	mov [option + si],al ;save letter S in option[0]
+	inc si				 ;increase counter to 1
+	mov ah, 01h			 ;request reading character
+	int 21h				 ;call interruption
+	cmp al, 41H 		 ;if al = letter A
+	je %%letterA		 ;jump to state letter A
+	cmp al, 48h 		 ;if al = letter H
+	je %%letterH         ;then jump to state H for SHOW
+	jmp %%endReading	 ;Error no input match end macro
+	%%letterA:			 
+	mov [option + si],al ;save letter A in option[1]
+	inc si				 ;increase counter to 2
+	mov ah, 01h
+	int 21h
+	cmp al, 56h 		 ;if al = letter V
+	je %%letterV
+	jmp %%endReading
+	%%letterV:
+	mov [option + si],al ;save letter V in option[2]
+	inc si				 ;increase counter to 3
+	mov ah, 01h
+	int 21h
+	cmp al, 45h 		 ;if al = letter E
+	je %%letterE2
+	jmp %%endReading
+	%%letterE2: 		 ;las state for option SAVE
+	mov [option + si],al ;save letter E in option[3]
+	print newline
+	print optionMsg
+	print option
+	mov ah , '1'		 ;the option to run is optionRun = (SAVE,1)
+	mov [optionRun],ah
+	jmp %%endReading	 ;end macro readingString
+	%%letterH:
+	mov [option + si],al ;save letter H in option[1]
+	inc si				 ;increase counter to 2
+	mov ah, 01h
+	int 21h
+	cmp al, 4fh 		 ;if al = letter O
+	je %%letterO
+	jmp %%endReading
+	%%letterO:
+	mov [option + si],al ;save letter O in option[2]
+	inc si				 ;increase counter to 3
+	mov ah, 01h
+	int 21h
+	cmp al, 57h 		 ;if al = letter W
+	je %%letterW
+	jmp %%endReading
+	%%letterW: 			 ;last state for option SHOW
+	mov [option + si],al ;save letter W in option[3]
+	print newline
+	print optionMsg
+	print option
+	mov ah,'2' 			 ;the option to run is optionRun = (SHOW,2)
+	mov [optionRun],ah
+	jmp %%endReading	 ;end macro readingString
+	%%skip:
+	cmp si,3
+	jne %%while
+	%%endReading:
+%endmacro;----------END MACRO READING STRING
 
 %macro GameStart 0
 	;call clean
@@ -105,7 +207,8 @@ esDos	db 0ah,0dh,'es dos',10,'$'
 esTres	db 0ah,0dh,'es tres',10,'$'
 gameStart db 10,13,'Juego Iniciado',10,13,'$'
 
-inputBuffer db 5,0,0,0,0,0,'$'
+option db 'endd','$'	;an array to save the string SHOW,SAVE,SHOW
+optionRun db '0','$'		;option to run SHOW,0. SAVE,1. SHOW,2
 
 headerString db 13,13,10
         db 'UNIVERSIDAD DE SAN CARLOS DE GUATEMALA',13,10
@@ -146,6 +249,7 @@ boardImage db '8 |  |FB|  |FB|  |FB|  |FB| ',10
  	  	   db '   == -- == -- == -- == --  ',10  
  	  	   db '   A  B  C  D  E  F  G  H   ',10,'$'
 
+optionMsg db 'The Option Is: ','$'
 
 newline db 13,10,'$'
 blankSpace db 20h,'$'
@@ -192,16 +296,13 @@ Menu:
 
 Opcion1:
 	print esUno
-	print boardUpperLine
 	;print gameStart
 	;GameStart
-	;readInputChar
 	readString
-	;mov bx,[inputBuffer]
-	;mov bl, 24h
-	;print bx 
-	;print inputBuffer
-	;jmp Main
+	print newline
+	print option
+	print blankSpace
+	print optionRun
 
 Opcion2:
 	print esDos
@@ -210,6 +311,9 @@ Opcion3:
 	print esTres
 	jmp exit
 
+prueba:
+	print boardImage
+	jmp Main
 Reset:
     mov ah, 02h         ;Colocar el cursor (02h salida de caracter)
     mov dx, 0000h       ;Colocar en dx las coordenadas
