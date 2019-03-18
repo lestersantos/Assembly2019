@@ -118,7 +118,7 @@ mainMenu    db '', 13, 10
         db '|   3. Salir.             |', 13, 10
         db '|_________________________|',13,10,'$'      ;Menu para interactuar con el programa
 
-boardUpperLine db 250,'$'
+boardUpperLine db 250,'$' ;symbol interpunct or space dot
 
 board db '8 |  |FB|  |FB|  |FB|  |FB| ',10
 	  db '   -- == -- == -- == -- ==  ',10
