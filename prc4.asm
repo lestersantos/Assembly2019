@@ -19,6 +19,12 @@
     int 21h        ;call the interruption
 %endmacro
 
+%macro readString 0
+	mov ah, 0ah
+	mov dx, inputBuffer
+	int 21h
+%endmacro
+
 %macro GameStart 0
 	;call clean
 
@@ -54,7 +60,7 @@
 		cmp cl,25
 		jne %%for
 	print newline
-	print board
+	print boardImage
 	print blankSpace
 	print blankSpace
 	xor cl,cl
@@ -99,6 +105,8 @@ esDos	db 0ah,0dh,'es dos',10,'$'
 esTres	db 0ah,0dh,'es tres',10,'$'
 gameStart db 10,13,'Juego Iniciado',10,13,'$'
 
+inputBuffer db 5,0,0,0,0,0,'$'
+
 headerString db 13,13,10
         db 'UNIVERSIDAD DE SAN CARLOS DE GUATEMALA',13,10
         db 'FACULTAD DE INGENIERIA ',13,10
@@ -120,26 +128,37 @@ mainMenu    db '', 13, 10
 
 boardUpperLine db 250,'$' ;symbol interpunct or space dot
 
-board db '8 |  |FB|  |FB|  |FB|  |FB| ',10
-	  db '   -- == -- == -- == -- ==  ',10
-	  db '7 |FB|  |FB|  |FB|  |FB|  | ',10 
- 	  db '   == -- == -- == -- == --  ',10
-	  db '6 |  |FB|  |FB|  |FB|  |FB| ',10  
- 	  db '   -- == -- == -- == -- ==  ',10
-	  db '5 |  |  |  |  |  |  |  |  | ',10  
- 	  db '   == -- == -- == -- == --  ',10
-	  db '4 |  |  |  |  |  |  |  |  | ',10 
- 	  db '   -- == -- == -- == -- ==  ',10
-	  db '3 |FN|  |FN|  |FN|  |FN|  | ',10 
- 	  db '   == -- == -- == -- == --  ',10
-	  db '2 |  |FN|  |FN|  |FN|  |FN| ',10  
- 	  db '   -- == -- == -- == -- ==  ',10
-	  db '1 |FN|  |FN|  |FN|  |FN|  | ',10
- 	  db '   == -- == -- == -- == --  ',10  
- 	  db '   A  B  C  D  E  F  G  H   ',10,'$'
+boardImage db '8 |  |FB|  |FB|  |FB|  |FB| ',10
+	  	   db '   -- == -- == -- == -- ==  ',10
+	  	   db '7 |FB|  |FB|  |FB|  |FB|  | ',10 
+ 	  	   db '   == -- == -- == -- == --  ',10
+	  	   db '6 |  |FB|  |FB|  |FB|  |FB| ',10  
+ 	  	   db '   -- == -- == -- == -- ==  ',10
+	  	   db '5 |  |  |  |  |  |  |  |  | ',10  
+ 	  	   db '   == -- == -- == -- == --  ',10
+	  	   db '4 |  |  |  |  |  |  |  |  | ',10 
+ 	  	   db '   -- == -- == -- == -- ==  ',10
+	  	   db '3 |FN|  |FN|  |FN|  |FN|  | ',10 
+ 	  	   db '   == -- == -- == -- == --  ',10
+	  	   db '2 |  |FN|  |FN|  |FN|  |FN| ',10  
+ 	  	   db '   -- == -- == -- == -- ==  ',10
+	  	   db '1 |FN|  |FN|  |FN|  |FN|  | ',10
+ 	  	   db '   == -- == -- == -- == --  ',10  
+ 	  	   db '   A  B  C  D  E  F  G  H   ',10,'$'
+
 
 newline db 13,10,'$'
 blankSpace db 20h,'$'
+
+;empty space 0
+;white pawn  1
+;black pawn  2
+;white queen 3
+;black queen 4
+ ;0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
+board db 1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2 ;an array of 32 positions
+
+
 ;************************** END SECTION DATA***********************************
 
  
@@ -175,8 +194,13 @@ Opcion1:
 	print esUno
 	print boardUpperLine
 	;print gameStart
-	GameStart
-	readInputChar
+	;GameStart
+	;readInputChar
+	readString
+	;mov bx,[inputBuffer]
+	;mov bl, 24h
+	;print bx 
+	;print inputBuffer
 	;jmp Main
 
 Opcion2:
