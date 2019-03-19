@@ -146,6 +146,7 @@ boardImage db '8 |  |FB|  |FB|  |FB|  |FB| ',10
  	  	   db '   == -- == -- == -- == --  ',10  
  	  	   db '   A  B  C  D  E  F  G  H   ',10,'$'
 
+optionMsg db 'The Option Is: ','$'
 newline db 13,10,'$'
 blankSpace db 20h,'$'
 
