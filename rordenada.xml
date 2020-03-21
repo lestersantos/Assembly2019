@@ -1,0 +1,91 @@
+<Numeros>
+	<Numero>4</Numero>
+	<Numero>7</Numero>
+	<Numero>10</Numero>
+	<Numero>11</Numero>
+	<Numero>12</Numero>
+	<Numero>13</Numero>
+	<Numero>14</Numero>
+	<Numero>15</Numero>
+	<Numero>21</Numero>
+	<Numero>22</Numero>
+	<Numero>25</Numero>
+	<Numero>32</Numero>
+	<Numero>33</Numero>
+	<Numero>36</Numero>
+	<Numero>42</Numero>
+	<Numero>45</Numero>
+	<Numero>55</Numero>
+	<Numero>59</Numero>
+	<Numero>65</Numero>
+	<Numero>67</Numero>
+	<Numero>75</Numero>
+	<Numero>79</Numero>
+	<Numero>88</Numero>
+	<Numero>98</Numero>
+	<Numero>99</Numero>
+</Numeros>
+
+%macro BubbleSortDesc 2 ; 1 Array to sort,2 size
+	push ax
+	push bx
+	push cx
+	push si
+	push di
+	xor al,al
+	xor ah,ah 				;clean ah = 0
+	xor cx,cx
+	mov di,00h				;i = 0
+	mov si,00h 				;j = 0
+	mov al,[%2]				;length
+	;mov cx,02h 				
+	;mul cx
+	
+
+	%%for1:
+	;print mytest
+	mov si,00h 				;j = 0
+	cmp di,ax				; if di = ax ; i = length
+	je %%EndSort 			;if i = length -> then EndSort
+							;if not continue...
+	add di,02h 				; di = di + 2 -> i = i + 1
+	%%for2: 	
+
+	;add si,02h 			; si = si + 2 -> j = j + 1
+	cmp si,ax				; if j = length - 1 
+	;cmp si,08h
+	je %%for1 				; then jump back to for1
+	 						;if not equal
+	;---------------- auxArray[j] = bx ----------------------------------------	
+	mov bh, [%1+si] 		;copy the high order(8 bits more significant)before
+	mov bl, [%1+si+1] 		;copy the low  order(8 bits less significant)after	
+	;---------------- auxArray[j+1] = cx ----------------------------------------		
+	mov ch, [%1+si+2]  		;copy the high order(8 bits more significant)before
+	mov cl, [%1+si+3] 		;copy the low  order(8 bits less significant)after
+	;---------------- if(auxArray[j] > auxArray[j+1]) ---------------------------
+	cmp bx,cx
+	jl %%Swap				;if true then swap
+	add si,02h 				;if not si + 2 -> j + 1
+	jmp %%for2
+	%%Swap:
+	mov [%1+si],ch
+	mov [%1+si+1],cl
+	mov [%1+si+2],bh
+	mov [%1+si+3],bl
+	add si,02h
+	;push ax
+	;mov al,70
+	;mov [Width],al
+	;DrawArea 10,191,Width,9,00h
+	;DrawArea 150,191,Width,9,00h
+	DrawBarGraph auxArray,sizeArray
+	Delay 8
+	;pop ax
+	jmp %%for2
+	%%EndSort:
+	pop di
+	pop si
+	pop cx
+	pop bx
+	pop ax
+%endmacro

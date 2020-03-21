@@ -1,2 +1,2 @@
-nasm -f bin prc4.asm -o prc4.com
-prc4
+nasm -f bin py2.asm -o py2.com
+py2

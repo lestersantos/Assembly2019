@@ -43,4 +43,83 @@ ascii4 db 13,10,'ASCII4: ',228,2570,2571,2572,2573,2574,2575,2576,2577,2578,2579
 	print var
 	print var2
 	print var3
-------------------------------
+------SUM OF TWO NUMBERS INTIALIZED IN ASCII 'CHAR'/NEED OF PUSH DATA TO STACK AND RETRIEVE DUE TO USE OF SAME REGISTERS-------------------
+	printChar 06h ;print character 6 in ascii 
+	print tVar
+	print var
+	print newline
+	print tVar2
+	print var2
+	print newline
+	mov si,00
+	mov al, [var]
+	printChar al
+	sub al,'0'
+	printChar al
+	print newline
+	mov ah, [var2]
+	sub ah,'0'
+	printChar ah
+	;print newline
+	;printChar 28h
+	add ah, al
+	add ah,'0'
+	mov [var3],ah
+	;print tVar
+	print var
+	;print newline
+	;print tVar2
+	print var2
+	;print newline
+	;print tVar3
+	print var3
+	;print newline
+	;print justvar
+--PROBLEM FIXED ADDING THE PUSH STATEMENT TO SAVE AX REGISTER AND NOT LOSING DATA--------------------------------
+print tVar
+	print var
+	print newline
+	print tVar2
+	print var2
+	print newline
+	mov si,00
+	mov al, [var]
+	printChar al
+	sub al,'0'
+	printChar al
+	print newline
+	mov ah, [var2]
+	push ax
+	printChar ah
+	pop ax
+	sub ah,'0'
+	push ax
+	printChar ah
+	print newline
+	pop ax
+	add ah, al
+	add ah,'0'
+	mov [var3],ah
+	print tVar
+	print var
+	print newline
+	print tVar2
+	print var2
+	print newline
+	print tVar3
+	print var3
+---------PRINT A CHAR AND INCREASE---------------------
+;mov ah,02h
+	;mov dl,[columnLabel]
+	;int 21h
+	printChar [columnLabel]
+	mov al, [columnLabel]
+	inc al
+	mov [columnLabel],al
+	printChar [columnLabel]
+-------------------------
+----------------------------------HOW TO USE STACK---------------------------------------
+Assembly language provides two instructions for stack operations: PUSH and POP. These instructions have syntaxes like −
+
+PUSH    operand
+POP     address/register

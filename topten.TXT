@@ -1,0 +1,8 @@
+kraken,2,40,50;
+zira,1,0,3;
+user1,1,0,0;
+orion,1,0,0;
+carl,0,0,0;
+krusty,0,0,0;
+july,0,0,0;
+$

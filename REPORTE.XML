@@ -1,0 +1,59 @@
+<Arqui>
+<Encabezado>
+<Universidad>Universidad De San Carlos De Guatemala</Universidad>
+<Facultad>Facultad De Ingenieria</Facultad>
+<Escuela>Ciencias Y Sistemas</Escuela>
+<Curso>
+<Nombre>Arquitectura De Computadoras Y Ensambladores 1</Nombre>
+<Seccion>Seccion A</Seccion>
+</Curso>
+<Ciclo>Primer Semestre 2019</Ciclo>
+<Fecha>
+<Dia></Dia>
+<Mes></Mes>
+<Año></Año>
+</Fecha>
+<Hora>
+<Hora></Hora>
+<Minutos></Minutos>
+<Segundos></Segundos>
+</Hora>
+<Alumno>
+<Nombre>Lester Efrain Ajucum Santos</Nombre>
+<Carnet>201504510</Carnet>
+</Alumno>
+</Encabezado>
+<Resultados>
+<Lista_Entrada></Lista_Entrada>
+<Ordenamiento_BubbleSort>
+<Tipo></Tipo>
+<Lista_Ordenada></Lista_Ordenada>
+<Velocidad></Velocidad>
+<Tiempo>
+<Minutos></Minutos>
+<Segundos></Segundos>
+<Milisegundos></Milisegundos>
+</Tiempo>
+</Ordenamiento_BubbleSort>
+<Ordenamiento_QuickSort>
+<Tipo></Tipo>
+<Lista_Ordenada></Lista_Ordenada>
+<Velocidad></Velocidad>
+<Tiempo>
+<Minutos></Minutos>
+<Segundos></Segundos>
+<Milisegundos></Milisegundos>
+</Tiempo>
+</Ordenamiento_QuickSort>
+<Ordenamiento_ShellSort>
+<Tipo></Tipo>
+<Lista_Ordenada></Lista_Ordenada>
+<Velocidad></Velocidad>
+<Tiempo>
+<Minutos></Minutos>
+<Segundos></Segundos>
+<Milisegundos></Milisegundos>
+</Tiempo>
+</Ordenamiento_ShellSort>
+</Resultados>
+</Arqui>

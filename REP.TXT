@@ -1,0 +1,13 @@
+{
+"Fecha":"23/03/2018",
+"Carnet":"201513744",
+"Nombre":"Edwin Pernilla",
+"Resultado":{
+"Media":" 83",
+"Mediana":" 25",
+"Moda":" 12",
+"Maximo":"445",
+"Minimo":" 12",
+"Varianza":"Á78",
+"Desviacion":"120"
+}}
