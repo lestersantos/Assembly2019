@@ -329,6 +329,7 @@ boardImage db '8 |  |FB|  |FB|  |FB|  |FB| ',10
  	  	   db '   A  B  C  D  E  F  G  H   ',10,'$'
 
 optionMsg db 'The Option Is: ','$'
+<<<<<<< HEAD
 columnLabel db '8','$'
 emptyBox  db '|  ','$'
 whitePawn db 'FB','$'
@@ -338,6 +339,8 @@ evenSplitLine db '   -- == -- == -- == -- ==  ',10,'$'
 oddSplitLine  db '   == -- == -- == -- == --  ',10,'$'
 boardBtLabel  db '   A  B  C  D  E  F  G  H   ',10,'$'
 
+=======
+>>>>>>> 9fbe3e3f9bb71f90efab2e3caf96bbcc297f8384
 newline db 13,10,'$'
 blankSpace db 20h,'$'
 
